@@ -19,7 +19,6 @@ def main(args):
     r = 0.36      # radius of holes
     d = 1.4       # defect spacing (ordinary spacing = 1)
     N = args.N    # number of holes on either side of defect
-
     sy = args.sy  # size of cell in y direction (perpendicular to wvg.)
     pad = 2       # padding between last hole and PML edge
     dpml = 1      # PML thickness
