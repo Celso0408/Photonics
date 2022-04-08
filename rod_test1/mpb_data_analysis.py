@@ -1,5 +1,4 @@
-import os
-import sys
+import os, sys
 import numpy as np
 import meep as mp
 import matplotlib.pyplot as plt
@@ -23,7 +22,7 @@ def tri_rods():
                                         get_efields))
 
     # Create an MPBData instance to transform the efields
-    md = mpb.MPBData(rectify=True, resolution=32, periods=3)
+    md = mpb.MPBData(rectify=True, resolution=32, periods=5)
 
     converted = []
     for f in efields:
@@ -38,7 +37,7 @@ def tri_rods():
     plt.axis('off')
     plt.show()
 
-    md = mpb.MPBData(rectify=True, resolution=32, periods=3)
+    md = mpb.MPBData(rectify=True, resolution=32, periods=5)
     rectangular_data = md.convert(eps)
     plt.imshow(rectangular_data.T, interpolation='spline36', cmap='binary')
     plt.axis('off')
