@@ -11,6 +11,12 @@ geometry_lattice = mp.Lattice(size=mp.Vector3(1, 1),
 
 geometry = [mp.Cylinder(0.4, material=mp.Medium(epsilon=12))]
 
+sources = [mp.Source(mp.ContinuousSource(wavelength=2*(11**0.5), width=20),
+                     component=mp.Ez,
+                     center=mp.Vector3(-7,-3.5),
+                     size=mp.Vector3(0,1))]
+
+
 k_points = [
     mp.Vector3(),               # Gamma
     mp.Vector3(y=0.5),          # M
@@ -26,6 +32,7 @@ ms = mpb.ModeSolver(
     resolution=resolution,
     num_bands=num_bands
 )
+
 ms.run_tm(mpb.output_at_kpoint(mp.Vector3(-1./3, 1./3), mpb.fix_efield_phase,
           mpb.output_efield_z))
 tm_freqs = ms.all_freqs

@@ -71,4 +71,4 @@ def diamond():
 
 if __name__ == '__main__':
     tri_rods()
-    diamond()
+    #diamond()
