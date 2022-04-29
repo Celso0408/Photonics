@@ -1,6 +1,8 @@
+import matplotlib.pyplot as plt
 import math
 import meep as mp
 from meep import mpb
+from band_plot import plot_band
 
 num_bands = 8
 resolution = 32
@@ -9,7 +11,7 @@ geometry_lattice = mp.Lattice(size=mp.Vector3(1, 1),
                               basis2=mp.Vector3(math.sqrt(3)/2, -0.5))
 
 
-geometry = [mp.Cylinder(0.4, material=mp.Medium(epsilon=12))]
+geometry = [mp.Cylinder(0.2, material=mp.Medium(epsilon=12))]
 
 sources = [mp.Source(mp.ContinuousSource(wavelength=2*(11**0.5), width=20),
                      component=mp.Ez,
@@ -35,8 +37,11 @@ ms = mpb.ModeSolver(
 
 ms.run_tm(mpb.output_at_kpoint(mp.Vector3(-1./3, 1./3), mpb.fix_efield_phase,
           mpb.output_efield_z))
+
 tm_freqs = ms.all_freqs
 tm_gaps = ms.gap_list
 ms.run_te()
 te_freqs = ms.all_freqs
 te_gaps = ms.gap_list
+
+plot_band(tm_freqs, tm_gaps, te_freqs, te_gaps)
